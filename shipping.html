@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shipping Services — Afeulink</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --cream: #f5f2ec;
+      --gray: #6b6b6b;
+      --light: #f0ede8;
+      --border: #e0dbd3;
+      --gold: #c9a84c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    .nav-cta {
+      background: var(--black);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover { background: #333 !important; color: var(--white) !important; }
+
+    /* HERO */
+    .hero {
+      padding: 10rem 2.5rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      font-family: 'Georgia', serif;
+    }
+
+    .hero-tags {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--gray);
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--cream);
+      padding: 3rem 2.5rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* SECTION */
+    .section {
+      padding: 5rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 3rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* RATES TABLE */
+    .rates-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    .rates-table th {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-weight: 400;
+    }
+
+    .rates-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .rates-table tr:last-child td { border-bottom: none; }
+    .rates-table tr:nth-child(even) td { background: var(--cream); }
+
+    .rate-price {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .rate-note {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-top: 0.5rem;
+    }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      padding-top: 0.2rem;
+    }
+
+    .step-content h3 {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    /* TWO COLUMNS */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .col-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 2px;
+    }
+
+    .col-card h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+
+    .col-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .col-card ul li {
+      font-size: 0.95rem;
+      color: var(--black);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .col-card ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gray);
+    }
+
+    .col-card.no-ship ul li::before { content: '✕'; color: #c0392b; }
+
+    /* SERVICES COMPARISON */
+    .service-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 2px;
+    }
+
+    .service-card.featured {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .service-badge {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--cream);
+      color: var(--gray);
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .service-card.featured .service-badge {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .service-card h3 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card .price {
+      font-size: 2rem;
+      font-weight: 400;
+      margin: 1rem 0 0.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .service-card .price-note {
+      font-size: 0.8rem;
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card.featured .price-note { color: rgba(255,255,255,0.6); }
+
+    .service-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .service-card ul li {
+      font-size: 0.9rem;
+      color: var(--gray);
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .service-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gray);
+    }
+
+    .service-card.featured ul li { color: rgba(255,255,255,0.75); }
+    .service-card.featured ul li::before { color: rgba(255,255,255,0.4); }
+
+    /* CTA */
+    .cta-section {
+      background: var(--black);
+      color: var(--white);
+      padding: 5rem 2.5rem;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--white);
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.7); }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      color: rgba(255,255,255,0.4);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: rgba(255,255,255,0.8); }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.25rem 3rem; }
+      .section { padding: 3rem 1.25rem; }
+      .stats { padding: 2rem 1.25rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .service-cards { grid-template-columns: 1fr; }
+      .step { grid-template-columns: 40px 1fr; gap: 1rem; }
+      .cta-section { padding: 3rem 1.25rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Afeulink</a>
+  <ul class="nav-links">
+    <li><a href="/#how">How it works</a></li>
+    <li><a href="/#what">What we source</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/shipping.html">Shipping</a></li>
+    <li><a href="/#contact" class="nav-cta">Get a quote</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Afeulink Shipping Services</p>
+  <h1>Ship from Belgium<br>to <em>Africa</em> in 2 days.</h1>
+  <p class="hero-sub">We use our DHL Express business account to ship your packages to Ghana, Nigeria and beyond — at rates you won't find anywhere else.</p>
+  <div class="hero-tags">
+    <span class="tag">DHL Express</span>
+    <span class="tag">Door to door</span>
+    <span class="tag">Real-time tracking</span>
+    <span class="tag">220+ countries</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Days to Ghana & Nigeria</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">220+</div>
+      <div class="stat-label">Countries served</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">70 kg</div>
+      <div class="stat-label">Maximum weight</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">DHL</div>
+      <div class="stat-label">Trusted carrier</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section">
+  <p class="section-label">Our services</p>
+  <h2>Two shipping options.<br>Every need covered.</h2>
+
+  <div class="service-cards">
+    <div class="service-card featured">
+      <span class="service-badge">Most popular</span>
+      <h3>Afeulink Express</h3>
+      <div class="price">2 days</div>
+      <div class="price-note">Door-to-door via DHL Express</div>
+      <ul>
+        <li>Delivered in 2 business days</li>
+        <li>Real-time tracking</li>
+        <li>Full insurance available</li>
+        <li>Ghana, Nigeria and worldwide</li>
+        <li>From 0.5 kg to 70 kg</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <span class="service-badge">Budget friendly</span>
+      <h3>Afeulink Economy</h3>
+      <div class="price">€13/kg</div>
+      <div class="price-note">Groupage — 2 to 4 weeks</div>
+      <ul>
+        <li>Best for heavy shipments (10 kg+)</li>
+        <li>Clothing, household goods</li>
+        <li>Non-urgent packages</li>
+        <li>Ghana and Nigeria</li>
+        <li>Significant cost savings</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RATES TABLE -->
+<section class="section">
+  <p class="section-label">Express rates</p>
+  <h2>Transparent pricing.<br>No surprises.</h2>
+
+  <table class="rates-table">
+    <thead>
+      <tr>
+        <th>Weight</th>
+        <th>Ghana</th>
+        <th>Nigeria</th>
+        <th>Europe</th>
+        <th>USA / Canada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Up to 2 kg</strong></td>
+        <td class="rate-price">€95</td>
+        <td class="rate-price">€95</td>
+        <td class="rate-price">€35</td>
+        <td class="rate-price">€75</td>
+      </tr>
+      <tr>
+        <td><strong>Up to 5 kg</strong></td>
+        <td class="rate-price">€140</td>
+        <td class="rate-price">€140</td>
+        <td class="rate-price">€45</td>
+        <td class="rate-price">€110</td>
+      </tr>
+      <tr>
+        <td><strong>Up to 10 kg</strong></td>
+        <td class="rate-price">€185</td>
+        <td class="rate-price">€185</td>
+        <td class="rate-price">€55</td>
+        <td class="rate-price">€155</td>
+      </tr>
+      <tr>
+        <td><strong>Up to 20 kg</strong></td>
+        <td class="rate-price">€280</td>
+        <td class="rate-price">€280</td>
+        <td class="rate-price">€80</td>
+        <td class="rate-price">€240</td>
+      </tr>
+      <tr>
+        <td><strong>Economy (per kg)</strong></td>
+        <td class="rate-price">€13/kg</td>
+        <td class="rate-price">€13/kg</td>
+        <td class="rate-price">—</td>
+        <td class="rate-price">—</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="rate-note">All prices include DHL fuel surcharge. Customs duties and local taxes are not included and are the responsibility of the recipient. Prices subject to change.</p>
+</section>
+
+<hr class="divider">
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <p class="section-label">The process</p>
+  <h2>Simple. Fast.<br>Reliable.</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Contact us for a quote</h3>
+        <p>Tell us your destination, package weight and contents via WhatsApp or email. We respond within 2 hours with a full price including all fees.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Drop off or arrange collection</h3>
+        <p>Bring your package to us in Temse, Belgium. Or we arrange a DHL pickup from your address — we'll let you know the collection fee upfront.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Pay and we ship</h3>
+        <p>Pay by bank transfer, Wise or cash. We book through our DHL Express business account and send you the tracking number immediately.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Delivered in 2 days</h3>
+        <p>Your package is delivered door-to-door by DHL Express. Track it in real time. We follow up to confirm safe delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- WHAT WE SHIP -->
+<section class="section">
+  <p class="section-label">Accepted goods</p>
+  <h2>What we ship.<br>What we don't.</h2>
+
+  <div class="two-col">
+    <div class="col-card">
+      <h3>We ship</h3>
+      <ul>
+        <li>Clothing and accessories</li>
+        <li>Electronics and gadgets</li>
+        <li>Cosmetics and skincare</li>
+        <li>Food and non-perishables</li>
+        <li>Documents and letters</li>
+        <li>Business samples</li>
+        <li>Spare parts and tools</li>
+        <li>Books and stationery</li>
+      </ul>
+    </div>
+    <div class="col-card no-ship">
+      <h3>We do not ship</h3>
+      <ul>
+        <li>Cash or banknotes</li>
+        <li>Weapons or ammunition</li>
+        <li>Illegal substances</li>
+        <li>Flammable liquids</li>
+        <li>Live animals</li>
+        <li>Perishable food</li>
+        <li>Counterfeit goods</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to ship?</h2>
+  <p>Contact us on WhatsApp for an instant quote. We respond within 2 hours.</p>
+  <div class="cta-buttons">
+    <a href="https://wa.me/32466363375" class="btn-primary">WhatsApp us now</a>
+    <a href="mailto:info@afeulink.com" class="btn-secondary">Send an email</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>AFEULINK · SOURCING EUROPE · DELIVERING AFRICA</span>
+  <span>
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="/#contact">Contact</a> &nbsp;·&nbsp;
+    © 2026 Afeulink
+  </span>
+</footer>
+
+</body>
+</html>
